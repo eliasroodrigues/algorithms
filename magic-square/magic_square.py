@@ -80,7 +80,7 @@ def magic_square_double_even(tam):
 
     link: https://www.1728.org/magicsq3.htm
 """
-def magic_square_singly_even(square):
+def magic_square_singly_even(size):
     pass
 
 """
@@ -102,37 +102,29 @@ def verify_magic_square(square, tam):
     sum_secondary_diagonal = [sum(x for x in secondary_diagonal)]
 
     print("\nMaigc Number:", magic_number)
-    print("Rows:", sums_rows, "Columns:", sums_columns)
-    print("Primary Diagonal:", sum_primary_diagonal, "Secondary Diagonal:", sum_secondary_diagonal)
+    print("Rows:", sums_rows, "\nColumns:", sums_columns)
+    print("Primary Diagonal:", sum_primary_diagonal, "\nSecondary Diagonal:", sum_secondary_diagonal)
+    print()
 
 if __name__ == "__main__":
     print("Magic Square")
-   
-    op = -1
-    while op != 0:
-        print("\n1. Odd\n2. Double even\n3. Singly Even\n0. Exit\n")
-        op = int(input(":: "))
-        if op == 1:
-            size = int(input("Size: "))
-            if size % 2 != 0:
-                square_odd = [[0 for y in range(size)] for x in range(size)]
-                magic_square_odd(square_odd, size // 2, 0, 1, 0, size)
-                print(square_odd)
-                verify_magic_square(square_odd, size)
-            else:
-                print("Please input a odd value.")
-        elif op == 2:
-            size = int(input("Size: "))
-            if size % 4 == 0:
-                square_even = magic_square_double_even(size)
-                print(square_even)
-                verify_magic_square(square_even, size)
-            else:
-                print("Please input a double even order.")
-        elif op == 3:
-            print("@todo")
-        elif op == 0:
-            exit(0)
-        else:
-            print("Invalid input.")
 
+    square = None
+    while True:
+        size = int(input("Input the size of the disired magic square: "))
+
+        if size % 2 != 0:
+            square = [[0 for y in range(size)] for x in range(size)]
+            magic_square_odd(square, size // 2, 0, 1, 0, size)
+        elif size % 4 == 0:
+            square = magic_square_double_even(size)
+        elif size % 2 == 0 and size % 4 != 0:
+            square = magic_square_singly_even(size)
+        else:
+            print("Invalid size.")
+
+        if square != None:
+            print()
+            print(square)
+            verify_magic_square(square, size)
+   

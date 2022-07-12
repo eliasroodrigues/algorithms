@@ -1,9 +1,9 @@
 """
   Dynamic Frog #1054
   
-  URL: https://www.beecrowd.com.br/judge/pt/problems/view/1054
+  Link: https://www.beecrowd.com.br/judge/pt/problems/view/1054
 
-  author: elias rodrigues, 0015920
+  Author: Elias E. S. Rodrigues
 """
 
 def dynamic_frog(rocks):

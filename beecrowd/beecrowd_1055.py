@@ -7,11 +7,35 @@
 """
 
 def elegant_permuted_sum(case):
+  """
+    Start the optimal solution with the first and last
+    numbers of the sequence.
+    Then create the new case without the two numbers
+    removed for the initial solution.
+    The current answer is the absolute value from the
+    first - last number.
+  """
   values = [case[0], case[-1]]
   new_case = case[1:-1]
   result = abs(values[0] - values[1])
   k = len(new_case)
 
+  """
+    While the length of the new case be greater then 0, do:
+    Compare the two values in the current optimal solution
+    with the first and last values from the new case, and
+    choose the one that maximize the value of result:
+      |values[0] - new_case[0]| or
+      |values[1] - new_case[1]| or
+      |values[0] - new_case[-1]| or
+      |values[1] - new_case[-1]|.
+    After picking the better one, change the number in the
+    optimal solution according with the number picked and
+    remove this number from new case.
+    Sum the result from the previous comparison with the
+    result.
+    Repeat he loop.
+  """
   while k > 0:
     maior = posV = posNC = -1
 
@@ -48,6 +72,7 @@ if __name__ == '__main__':
   t = int(input())
   
   for i in range(t):
+    """ Get the input and sort it in the non decreasing order. """
     case = input().split()
     case = [int(case[n]) for n in range(1, len(case))]
     case.sort()

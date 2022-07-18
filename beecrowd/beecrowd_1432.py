@@ -1,19 +1,13 @@
 """
-  Triple-Free Binary Strings #1432
+  Strings Binárias Triple-Free #1432
 
   Link: https://www.beecrowd.com.br/judge/pt/problems/view/1432
 
   Author: Elias E. S. Rodrigues
 """
 
-memo = {}
-
 def check_triple_free(pattern, pos):
   limit = int(pos / 3)
-
-  key = ''.join(pattern)
-  if key == '000' or key == '111':
-    return False
 
   for i in range(1, limit+1):
     pos3 = pos - i
@@ -21,6 +15,9 @@ def check_triple_free(pattern, pos):
     pos1 = pos2 - i
     flag = True
 
+    """
+      Verifica se uma sequência SSS forma uma triple-free.
+    """
     for j in range(i):
       flag = False if pattern[pos1+j] != pattern[pos2+j] or pattern[pos2+j] != pattern[pos3+j] else True
       if not flag:
@@ -31,11 +28,16 @@ def check_triple_free(pattern, pos):
 
   return True
 
+"""
+  Verifica de forma recursiva qual o valor que está na posição
+  pos. Se for 0 ou 1 verifica se os valores de pos, pos-1, pos-2
+  foram uma triple-free, se for verdade continua a recursão até que
+  a posição seja igual o tamanho da sequência.
+
+  Tem um problema de recalculo, vários valores são recalculados
+  unúmeras vezes.
+"""
 def tf_binary_string(pattern, n, pos):
-  """
-    If the position that will be checked is equal to the string
-    length, return 1.
-  """
   if pos == n:
     return 1
 
@@ -58,11 +60,16 @@ def tf_binary_string(pattern, n, pos):
   return result
 
 if __name__ == '__main__':
-  i = 1
+  """ Arquivo de teste. """
+  # file = open('./beecrowd_1432_teste.txt', 'r')
+  # inputs = file.readlines()
+  # file.close()
+  # file = open('./beecrowd_1432_resultado.txt', 'w')
 
-  # results = []
-
+  i = 0
   while True:
+    # op = inputs[i].split()
+
     op = input().split()
 
     if op[0] == '0':
@@ -72,12 +79,10 @@ if __name__ == '__main__':
 
     answer = tf_binary_string(pattern, int(op[0]), 0)
 
-    # results.append(f'Case {i}: {answer}')
+    # file.write(f'Case {i+1}: {answer}\n')
 
-    # print(memo)
-    print(f'Case {i}: {answer}')
+    print(f'Case {i+1}: {answer}')
 
     i += 1
 
-  # for p in results:
-  #   print(p)
+  # file.close()

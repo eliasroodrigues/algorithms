@@ -1,5 +1,5 @@
 """
-  Elegant Permuted Sum #1055
+  Soma Permutada Elegante #1055
 
   Link: https://www.beecrowd.com.br/judge/pt/problems/view/1055
 
@@ -8,12 +8,11 @@
 
 def elegant_permuted_sum(case):
   """
-    Start the optimal solution with the first and last
-    numbers of the sequence.
-    Then create the new case without the two numbers
-    removed for the initial solution.
-    The current answer is the absolute value from the
-    first - last number.
+    Ordene o caso de teste e começe a solução ótima
+    usadno o menor e maior valor da sequência, remova esses
+    dois valores da sequencia.
+    O resultado por enquanto é a diferença absoluta entre
+    dois valores.
   """
   values = [case[0], case[-1]]
   new_case = case[1:-1]
@@ -21,20 +20,19 @@ def elegant_permuted_sum(case):
   k = len(new_case)
 
   """
-    While the length of the new case be greater then 0, do:
-    Compare the two values in the current optimal solution
-    with the first and last values from the new case, and
-    choose the one that maximize the value of result:
-      |values[0] - new_case[0]| or
-      |values[1] - new_case[1]| or
-      |values[0] - new_case[-1]| or
-      |values[1] - new_case[-1]|.
-    After picking the better one, change the number in the
-    optimal solution according with the number picked and
-    remove this number from new case.
-    Sum the result from the previous comparison with the
-    result.
-    Repeat he loop.
+    Enquanto o tamanho da nova sequência for maior que 0 compare
+    o quanto irá ganhar de colocar o menor valor da sequência
+    no começo da solução ou no final da solução, faço o mesmo com
+    o maior valor da sequência, então escolha o maior resultado.
+      |menor valor - solução[0]| ou
+      |maior valor - solução[0]| ou
+      |menor valor - solução[1]| ou
+      |maior valor - solução[1]|.
+    Depois de pegar o resultado que gera o maior valor, troque
+    o valor da solução na posição escolhida pelo valor escolhido,
+    e acrescente no resultado a quantia ganha com essa nova escolha.
+    Repita esse processo até os valores da sequência acabarem.
+    Retorne o resultado.
   """
   while k > 0:
     maior = posV = posNC = -1
@@ -72,7 +70,6 @@ if __name__ == '__main__':
   t = int(input())
   
   for i in range(t):
-    """ Get the input and sort it in the non decreasing order. """
     case = input().split()
     case = [int(case[n]) for n in range(1, len(case))]
     case.sort()

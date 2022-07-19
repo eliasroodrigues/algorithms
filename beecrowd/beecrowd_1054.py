@@ -1,5 +1,5 @@
 """
-  Dynamic Frog #1054
+  Sapo Dinâmico #1054
   
   Link: https://www.beecrowd.com.br/judge/pt/problems/view/1054
 
@@ -7,13 +7,15 @@
 """
 
 def dynamic_frog(rocks):
-  """ The two frogs starts at left side of the river.
+  """
+    Os dois sapos começam na margem esquerda do lago.
   """
   frog1 = [int(rocks[0][2:])]
   frog2 = [int(rocks[0][2:])]
   solution = []
 
-  """ Frog 1 is the first to go.
+  """
+    O sapo 1 é o primeiro a pular.
   """
   turn1 = True
 
@@ -21,8 +23,11 @@ def dynamic_frog(rocks):
     curr_rock = int(rocks[i][2:])
     curr_type = rocks[i][0]
 
-    """ If the rock type is 'S' we need to alternate which frog can jump,
-        in order to balance the jump distance.
+    """
+      Verifica qual o próximo tipo de pedra para decidir
+      o pulo dos sapos. Se for a pedra tipo 'S' somente um
+      dos sapos pode pular nela. A cada pedra do tipo 'S'
+      encontrada o pulo é alternado entre os sapos.
     """
     if curr_type == 'S':
       if turn1:
@@ -38,7 +43,9 @@ def dynamic_frog(rocks):
 
         turn1 = True
     else:
-      """ If the rock type is B, the two frogs can jump.
+      """
+        Se o tipo de pdra é 'B', então os dois sapos
+        podem pular nela, não é necessário alternar o pulo.
       """
       jump1 = curr_rock - frog1[-1]
       jump2 = curr_rock - frog2[-1]
@@ -47,6 +54,12 @@ def dynamic_frog(rocks):
       solution.append(jump1)
       solution.append(jump2)
 
+  """
+    Retorna o maior valor do pulo encontrado. Como os sapos
+    estão alternando os pulos nas pedras do tipo 'S' e pulando
+    nas mesmas do tipo 'B', a maior distância do pulo que o
+    sapo dará na ida e volta do lago será minimizada.
+  """
   return max(solution)
 
 if __name__ == "__main__":
@@ -56,8 +69,10 @@ if __name__ == "__main__":
     maxD = input().split()[1]
     rocks = input().split()
 
-    """ Insert two 'B' rocks, one on the left side with distance '0'
-        and another at the right side with the 'maxD' distance. 
+    """
+      Insere duas pedras grandes 'B', uma no começo para representar
+      a margem esquerda (B-0) e outra no final da lista para representar
+      a margem direita (B-maxD).
     """
     rocks.insert(0, 'B-0')
     rocks.append('B-' + maxD)
